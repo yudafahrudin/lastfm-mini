@@ -10,6 +10,7 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
+  TablePagination,
 } from "@mui/material";
 
 import { Search } from "@mui/icons-material";
@@ -17,7 +18,15 @@ import { Search } from "@mui/icons-material";
 import { useArtistCase } from "@/useCases/Artist";
 
 const HomePresenter: React.FC = () => {
-  const { loading, artistList, handleArtistSearch } = useArtistCase();
+  const {
+    loading,
+    artistList,
+    handleArtistSearch,
+    page,
+    total,
+    rowPage,
+    handleChangePage,
+  } = useArtistCase();
 
   return (
     <Container>
@@ -70,7 +79,7 @@ const HomePresenter: React.FC = () => {
           return (
             <>
               <Grid item xs={0.5}>
-                {index + 1}
+                {index + 1 + (page === 0 ? 0 : page * rowPage)}
               </Grid>
               <Grid item xs={1}>
                 <ListItemAvatar>
@@ -93,6 +102,17 @@ const HomePresenter: React.FC = () => {
           );
         })}
       </Grid>
+      <Grid item xs={12}>
+        {loading && <LinearProgress />}
+      </Grid>
+      <TablePagination
+        component="div"
+        count={total}
+        page={page}
+        rowsPerPageOptions={[rowPage]}
+        rowsPerPage={rowPage}
+        onPageChange={handleChangePage}
+      />
     </Container>
   );
 };

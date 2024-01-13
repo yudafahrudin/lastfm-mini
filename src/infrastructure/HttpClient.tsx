@@ -3,11 +3,10 @@ const customHeaders = {
 };
 
 async function get<T>(url: string, config: string = ""): Promise<T> {
-  const response = fetch(url + config, {
+  return await fetch(url + config, {
     method: "GET",
     headers: customHeaders,
-  });
-  return (await response).json();
+  }).then((response) => response.json());
 }
 
 export default {

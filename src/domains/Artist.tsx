@@ -1,6 +1,12 @@
 export type ArtistsType = {
   artists: {
     artist: ArtistType[];
+    "@attr": {
+      page: string;
+      perPage: string;
+      total: string;
+      totalPages: string;
+    };
   };
 };
 
@@ -24,5 +30,8 @@ export type ArtistSearchType = {
     artistmatches: {
       artist: ArtistType[];
     };
+    "opensearch:itemsPerPage": string;
+    "opensearch:startIndex": string;
+    "opensearch:totalResults": string;
   };
 };

@@ -12,14 +12,14 @@ const artistSearchAPI =
   LASTFM_API_KEY +
   "&format=json";
 
-export const artistTopResource = async () => {
-  return await HttpClient.get<ArtistsType>(artistAPI);
+export const artistTopResource = async (page: number) => {
+  return await HttpClient.get<ArtistsType>(artistAPI, `&page=${page}`);
 };
 
-export const artisSearchResource = async (key: string = "") => {
+export const artisSearchResource = async (key: string = "", page: number) => {
   return await HttpClient.get<ArtistSearchType>(
     artistSearchAPI,
-    `&artist=${key}`
+    `&artist=${key}&page=${page}`
   );
 };
 

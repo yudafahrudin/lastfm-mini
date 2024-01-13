@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-
-// external component
 import { debounce } from "@mui/material";
 
 // resource
@@ -8,6 +6,8 @@ import {
   songTopTrackResource,
   songSearchResource,
 } from "@/infrastructure/resources/SongResource";
+
+// domain type
 import { SongType } from "@/domains/Song";
 
 export const useSongCase = () => {
