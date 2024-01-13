@@ -4,7 +4,6 @@ import {
   Typography,
   AppBar,
   Toolbar,
-  useMediaQuery,
   useTheme,
   Button,
 } from "@mui/material";
