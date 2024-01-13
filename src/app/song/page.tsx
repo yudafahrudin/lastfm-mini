@@ -2,15 +2,15 @@
 
 import React from "react";
 
-import HomePresentation from "@/presentations/Home";
+import SongPresentation from "@/presentations/Song";
 import DefaultWrapper from "@/components/DefaultWrapper";
 
-const HomePage: React.FC = () => {
+const SongPage: React.FC = () => {
   return (
     <DefaultWrapper>
-      <HomePresentation />
+      <SongPresentation />
     </DefaultWrapper>
   );
 };
 
-export default HomePage;
+export default SongPage;
