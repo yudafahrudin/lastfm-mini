@@ -18,3 +18,11 @@ export type ArtistImageType = {
   "#text": string;
   size: string;
 };
+
+export type ArtistSearchType = {
+  results: {
+    artistmatches: {
+      artist: ArtistType[];
+    };
+  };
+};

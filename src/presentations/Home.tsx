@@ -1,22 +1,47 @@
 "use client";
 
 import React from "react";
-import { Stack, Grid, Box, Container } from "@mui/material";
+import {
+  Stack,
+  Grid,
+  LinearProgress,
+  Container,
+  Input,
+  IconButton,
+  Divider,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+} from "@mui/material";
 
-import Divider from "@mui/material/Divider";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
+import { Search } from "@mui/icons-material";
 
 import { useArtistCase } from "@/useCases/Artist";
 
 const HomePresenter: React.FC = () => {
-  const { artistList } = useArtistCase();
+  const { loading, artistList, handleArtistSearch } = useArtistCase();
 
   return (
     <Container>
-      <Stack mb={5} spacing={2}>
-        <Typography variant="h3">Top 50 Artist</Typography>
+      <Stack
+        mb={7}
+        mt={2}
+        spacing={2}
+        direction="row"
+        justifyContent="space-between"
+      >
+        <Typography variant="h2">Top 50 Artist</Typography>
+        <Input
+          onChange={(e) => {
+            handleArtistSearch(e.target.value);
+          }}
+          placeholder="find your artist"
+          endAdornment={
+            <IconButton>
+              <Search />
+            </IconButton>
+          }
+        />
       </Stack>
 
       <Grid
@@ -28,18 +53,22 @@ const HomePresenter: React.FC = () => {
         <Grid item xs={0.5} />
         <Grid item xs={1} />
         <Grid item xs={5.5}>
-          <Typography variant="subtitle2">Name</Typography>
+          <b>Name</b>
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="subtitle2">Listener</Typography>
+          <b>Listener</b>
         </Grid>
         <Grid item xs={2}>
-          <Typography variant="subtitle2">Play Count</Typography>
+          <b>Play Count</b>
         </Grid>
+
         <Grid item xs={12}>
-          <Divider />
+          {loading ? <LinearProgress /> : <Divider />}
         </Grid>
+
         {artistList?.map((data, index) => {
+          const numberListener = Number(data.listeners);
+          const numberPlayCount = Number(data.playcount);
           return (
             <>
               <Grid item xs={0.5}>
@@ -51,13 +80,13 @@ const HomePresenter: React.FC = () => {
                 </ListItemAvatar>
               </Grid>
               <Grid item xs={5.5}>
-                <Typography variant="subtitle1"> {data.name}</Typography>
+                {data.name}
               </Grid>
               <Grid item xs={3}>
-                {data.listeners}
+                {numberListener.toLocaleString()}
               </Grid>
               <Grid item xs={2}>
-                {data.playcount}
+                {numberPlayCount ? numberPlayCount.toLocaleString() : "-"}
               </Grid>
               <Grid item xs={12}>
                 <Divider />
