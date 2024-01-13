@@ -10,6 +10,7 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
+  TablePagination,
 } from "@mui/material";
 
 import { Search } from "@mui/icons-material";
@@ -17,7 +18,16 @@ import { Search } from "@mui/icons-material";
 import { useSongCase } from "@/useCases/Song";
 
 const SongPresentation: React.FC = () => {
-  const { loading, songList, handleSongSearch } = useSongCase();
+  const {
+    loading,
+    songList,
+    page,
+    total,
+    rowPage,
+    handleChangePage,
+    handleSongSearch,
+  } = useSongCase();
+
   return (
     <Container>
       <Stack
@@ -67,7 +77,7 @@ const SongPresentation: React.FC = () => {
           return (
             <>
               <Grid item xs={0.5}>
-                {index + 1}
+                {index + 1 + (page === 0 ? 0 : page * rowPage)}
               </Grid>
               <Grid item xs={1}>
                 <ListItemAvatar>
@@ -95,6 +105,17 @@ const SongPresentation: React.FC = () => {
           );
         })}
       </Grid>
+      <Grid item xs={12}>
+        {loading && <LinearProgress />}
+      </Grid>
+      <TablePagination
+        component="div"
+        count={total}
+        page={page}
+        rowsPerPageOptions={[rowPage]}
+        rowsPerPage={rowPage}
+        onPageChange={handleChangePage}
+      />
     </Container>
   );
 };

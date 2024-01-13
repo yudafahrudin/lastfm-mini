@@ -1,6 +1,12 @@
 export type SongsType = {
   tracks: {
     track: SongType[];
+    "@attr": {
+      page: string;
+      perPage: string;
+      total: string;
+      totalPages: string;
+    };
   };
 };
 
@@ -37,5 +43,8 @@ export type SongSearchType = {
     trackmatches: {
       track: SongType[];
     };
+    "opensearch:itemsPerPage": string;
+    "opensearch:startIndex": string;
+    "opensearch:totalResults": string;
   };
 };

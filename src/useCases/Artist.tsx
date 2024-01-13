@@ -31,11 +31,11 @@ export const useArtistCase = () => {
   const getArtistTopList = async () => {
     setLoading(true);
     const data = await artistTopResource(page + 1);
-    const artist = data.artists.artist;
+    const artists = data.artists.artist;
     const attribute = data.artists["@attr"];
 
     // set data logic
-    setArtistList(artist);
+    setArtistList(artists);
 
     // set attribute pagination
     setTotal(Number(attribute.total));

@@ -33,13 +33,12 @@ const DefaultWrapper: React.FC<Props> = ({ children, leftIcon, rightIcon }) => {
                   </Link>
                 </Stack>
               )}
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row" spacing={2}>
                 <Link href="/" underline="none" color="inherit">
-                  Top Artists
-                </Link>
-
-                <Link href="/song" underline="none" color="inherit">
                   Top Songs
+                </Link>
+                <Link href="/artist" underline="none" color="inherit">
+                  Top Artists
                 </Link>
               </Stack>
               <Stack direction="row" spacing={1} sx={{ marginLeft: "auto" }}>

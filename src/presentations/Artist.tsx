@@ -17,7 +17,7 @@ import { Search } from "@mui/icons-material";
 
 import { useArtistCase } from "@/useCases/Artist";
 
-const HomePresenter: React.FC = () => {
+const ArtistPresentation: React.FC = () => {
   const {
     loading,
     artistList,
@@ -117,4 +117,4 @@ const HomePresenter: React.FC = () => {
   );
 };
 
-export default HomePresenter;
+export default ArtistPresentation;
