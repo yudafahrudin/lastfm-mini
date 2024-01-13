@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Stack,
-  Typography,
-  AppBar,
-  Toolbar,
-  useTheme,
-  Button,
-  Box,
-} from "@mui/material";
-import { MusicNoteOutlined } from "@mui/icons-material";
+
+import { Stack, AppBar, Toolbar, Link } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 interface Props {
@@ -28,8 +20,6 @@ const darkTheme = createTheme({
 });
 
 const DefaultWrapper: React.FC<Props> = ({ children, leftIcon, rightIcon }) => {
-  const theme = useTheme();
-
   return (
     <Stack spacing={2} mb={5}>
       <Stack direction="row">
@@ -37,16 +27,21 @@ const DefaultWrapper: React.FC<Props> = ({ children, leftIcon, rightIcon }) => {
           <AppBar color="default" position="static">
             <Toolbar>
               {leftIcon || (
-                <Box mr={2}>
-                  <MusicNoteOutlined />
-                </Box>
+                <Stack direction="row" p={1} mr={2}>
+                  <Link href="/" underline="none" color="primary">
+                    <strong>SOM</strong>
+                  </Link>
+                </Stack>
               )}
-              <Button color="inherit" variant="text">
-                <Typography>Top Artists</Typography>
-              </Button>
-              <Button color="inherit" variant="text">
-                <Typography>Top Songs</Typography>
-              </Button>
+              <Stack direction="row" spacing={1}>
+                <Link href="/" underline="none" color="inherit">
+                  Top Artists
+                </Link>
+
+                <Link href="/song" underline="none" color="inherit">
+                  Top Songs
+                </Link>
+              </Stack>
               <Stack direction="row" spacing={1} sx={{ marginLeft: "auto" }}>
                 <Stack direction="row" spacing={1}>
                   {rightIcon}

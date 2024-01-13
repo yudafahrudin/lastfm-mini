@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Stack,
@@ -30,7 +28,7 @@ const HomePresenter: React.FC = () => {
         direction="row"
         justifyContent="space-between"
       >
-        <Typography variant="h2">Top 50 Artist</Typography>
+        <Typography variant="h2">Top Artist</Typography>
         <Input
           onChange={(e) => {
             handleArtistSearch(e.target.value);
