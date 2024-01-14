@@ -11,6 +11,7 @@ import {
   Avatar,
   Typography,
   TablePagination,
+  Link,
 } from "@mui/material";
 
 import { Search } from "@mui/icons-material";
@@ -24,6 +25,9 @@ const SongPresentation: React.FC = () => {
     page,
     total,
     rowPage,
+    songKey,
+    artistKey,
+    handleSongSearchByArtist,
     handleChangePage,
     handleSongSearch,
   } = useSongCase();
@@ -38,15 +42,23 @@ const SongPresentation: React.FC = () => {
         justifyContent="space-between"
       >
         <Typography variant="h2">Top Song</Typography>
-        <Input
-          placeholder="find your song"
-          onChange={(e) => handleSongSearch(e.target.value)}
-          endAdornment={
-            <IconButton>
-              <Search />
-            </IconButton>
-          }
-        />
+        <Stack direction="row">
+          <Input
+            placeholder="find your song"
+            onChange={(e) => handleSongSearch(e.target.value)}
+          />
+          <Input
+            disabled={!songKey}
+            placeholder="by artist"
+            value={artistKey}
+            onChange={(e) => handleSongSearchByArtist(e.target.value)}
+            endAdornment={
+              <IconButton>
+                <Search />
+              </IconButton>
+            }
+          />
+        </Stack>
       </Stack>
       <Grid
         container
@@ -86,10 +98,22 @@ const SongPresentation: React.FC = () => {
               </Grid>
               <Grid item xs={5.5}>
                 <Stack>
-                  <Typography>{data.name}</Typography>
-                  <Typography fontSize={13} color="gray">
+                  <Link
+                    href={data.url}
+                    target="_blank"
+                    underline="none"
+                    fontWeight="bold"
+                  >
+                    {data.name}
+                  </Link>
+                  <Link
+                    href={data.artist.url}
+                    fontSize={13}
+                    target="_blank"
+                    sx={{ color: "gray" }}
+                  >
                     {data.artist.name || String(data.artist)}
-                  </Typography>
+                  </Link>
                 </Stack>
               </Grid>
               <Grid item xs={3}>

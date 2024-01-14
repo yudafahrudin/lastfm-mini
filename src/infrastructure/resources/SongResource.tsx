@@ -16,10 +16,14 @@ export const songTopTrackResource = async (page: number) => {
   return await HttpClient.get<SongsType>(songAPI, `&page=${page}`);
 };
 
-export const songSearchResource = async (key: string = "", page: number) => {
+export const songSearchResource = async (
+  key: string = "",
+  artistKey: string = "",
+  page: number
+) => {
   return await HttpClient.get<SongSearchType>(
     songSearchAPI,
-    `&track=${key}&page=${page}`
+    `&track=${key}&artist=${artistKey}&page=${page}`
   );
 };
 export default {

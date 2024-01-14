@@ -14,6 +14,7 @@ export const useSongCase = () => {
   const [loading, setLoading] = useState(false);
   const [songList, setSongList] = useState<SongType[]>();
   const [songKey, setSongKey] = useState("");
+  const [artistKey, setArtistKey] = useState("");
 
   // pagination
   const [page, setPage] = useState(0);
@@ -25,6 +26,13 @@ export const useSongCase = () => {
     newPage: number
   ) => {
     setPage(newPage);
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, 500);
   };
 
   const getSongTopList = async () => {
@@ -45,11 +53,17 @@ export const useSongCase = () => {
   const handleSongSearch = debounce(async (value) => {
     setPage(0);
     setSongKey(value);
+    if (!value) setArtistKey("");
+  }, 500);
+
+  const handleSongSearchByArtist = debounce(async (value) => {
+    setPage(0);
+    setArtistKey(value);
   }, 500);
 
   const searcSongList = async () => {
     setLoading(true);
-    const data = await songSearchResource(songKey, page + 1);
+    const data = await songSearchResource(songKey, artistKey, page + 1);
     const songs = data?.results?.trackmatches?.track || [];
     const pageIndex = data.results["opensearch:startIndex"];
     const perPage = data.results["opensearch:itemsPerPage"];
@@ -66,12 +80,12 @@ export const useSongCase = () => {
   };
 
   useEffect(() => {
-    if (songKey) {
+    if (songKey || artistKey) {
       searcSongList();
     } else {
       getSongTopList();
     }
-  }, [page, songKey]);
+  }, [page, songKey, artistKey]);
 
   return {
     loading,
@@ -79,7 +93,10 @@ export const useSongCase = () => {
     page,
     total,
     rowPage,
+    songKey,
+    artistKey,
     handleSongSearch,
+    handleSongSearchByArtist,
     handleChangePage,
   };
 };

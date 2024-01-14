@@ -11,6 +11,7 @@ import {
   Avatar,
   Typography,
   TablePagination,
+  Link,
 } from "@mui/material";
 
 import { Search } from "@mui/icons-material";
@@ -87,7 +88,14 @@ const ArtistPresentation: React.FC = () => {
                 </ListItemAvatar>
               </Grid>
               <Grid item xs={5.5}>
-                {data.name}
+                <Link
+                  href={data.url}
+                  target="_blank"
+                  underline="none"
+                  fontWeight="bold"
+                >
+                  {data.name}
+                </Link>
               </Grid>
               <Grid item xs={3}>
                 {numberListener.toLocaleString()}
