@@ -7,16 +7,15 @@ import {
   Input,
   IconButton,
   Divider,
-  ListItemAvatar,
-  Avatar,
   Typography,
   TablePagination,
-  Link,
 } from "@mui/material";
 
 import { Search } from "@mui/icons-material";
 
 import { useSongCase } from "@/useCases/Song";
+
+import SongList from "./SongList";
 
 const SongPresentation: React.FC = () => {
   const {
@@ -50,8 +49,8 @@ const SongPresentation: React.FC = () => {
           <Input
             disabled={!songKey}
             placeholder="by artist"
-            value={artistKey}
-            onChange={(e) => handleSongSearchByArtist(e.target.value)}
+            onChange={handleSongSearchByArtist}
+            defaultValue={artistKey}
             endAdornment={
               <IconButton>
                 <Search />
@@ -69,13 +68,13 @@ const SongPresentation: React.FC = () => {
         <Grid item xs={0.5} />
         <Grid item xs={1} />
         <Grid item xs={5.5}>
-          <b>Name</b>
+          Name
         </Grid>
         <Grid item xs={3}>
-          <b>Listener</b>
+          Listener
         </Grid>
         <Grid item xs={2}>
-          <b>Play Count</b>
+          Play Count
         </Grid>
 
         <Grid item xs={12}>
@@ -87,45 +86,15 @@ const SongPresentation: React.FC = () => {
           const numberPlayCount = Number(data.playcount);
 
           return (
-            <>
-              <Grid item xs={0.5}>
-                {index + 1 + (page === 0 ? 0 : page * rowPage)}
-              </Grid>
-              <Grid item xs={1}>
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={data.image[0]["#text"]} />
-                </ListItemAvatar>
-              </Grid>
-              <Grid item xs={5.5}>
-                <Stack>
-                  <Link
-                    href={data.url}
-                    target="_blank"
-                    underline="none"
-                    fontWeight="bold"
-                  >
-                    {data.name}
-                  </Link>
-                  <Link
-                    href={data.artist.url}
-                    fontSize={13}
-                    target="_blank"
-                    sx={{ color: "gray" }}
-                  >
-                    {data.artist.name || String(data.artist)}
-                  </Link>
-                </Stack>
-              </Grid>
-              <Grid item xs={3}>
-                {numberListener.toLocaleString()}
-              </Grid>
-              <Grid item xs={2}>
-                {numberPlayCount ? numberPlayCount.toLocaleString() : "-"}
-              </Grid>
-              <Grid item xs={12}>
-                <Divider />
-              </Grid>
-            </>
+            <SongList
+              key={`${data.artist.mbid}-${index}`}
+              index={index}
+              numberListener={numberListener}
+              numberPlayCount={numberPlayCount}
+              song={data}
+              page={page}
+              rowPage={rowPage}
+            />
           );
         })}
       </Grid>

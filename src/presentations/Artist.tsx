@@ -13,8 +13,9 @@ import {
   TablePagination,
   Link,
 } from "@mui/material";
-
 import { Search } from "@mui/icons-material";
+
+import ArtistList from "./ArtistList";
 
 import { useArtistCase } from "@/useCases/Artist";
 
@@ -61,13 +62,13 @@ const ArtistPresentation: React.FC = () => {
         <Grid item xs={0.5} />
         <Grid item xs={1} />
         <Grid item xs={5.5}>
-          <b>Name</b>
+          Name
         </Grid>
         <Grid item xs={3}>
-          <b>Listener</b>
+          Listener
         </Grid>
         <Grid item xs={2}>
-          <b>Play Count</b>
+          Play Count
         </Grid>
 
         <Grid item xs={12}>
@@ -77,42 +78,25 @@ const ArtistPresentation: React.FC = () => {
         {artistList?.map((data, index) => {
           const numberListener = Number(data.listeners);
           const numberPlayCount = Number(data.playcount);
+
           return (
-            <>
-              <Grid item xs={0.5}>
-                {index + 1 + (page === 0 ? 0 : page * rowPage)}
-              </Grid>
-              <Grid item xs={1}>
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={data.image[0]["#text"]} />
-                </ListItemAvatar>
-              </Grid>
-              <Grid item xs={5.5}>
-                <Link
-                  href={data.url}
-                  target="_blank"
-                  underline="none"
-                  fontWeight="bold"
-                >
-                  {data.name}
-                </Link>
-              </Grid>
-              <Grid item xs={3}>
-                {numberListener.toLocaleString()}
-              </Grid>
-              <Grid item xs={2}>
-                {numberPlayCount ? numberPlayCount.toLocaleString() : "-"}
-              </Grid>
-              <Grid item xs={12}>
-                <Divider />
-              </Grid>
-            </>
+            <ArtistList
+              key={`${data.mbid}-${index}`}
+              index={index}
+              numberListener={numberListener}
+              numberPlayCount={numberPlayCount}
+              artist={data}
+              page={page}
+              rowPage={rowPage}
+            />
           );
         })}
       </Grid>
+
       <Grid item xs={12}>
         {loading && <LinearProgress />}
       </Grid>
+
       <TablePagination
         component="div"
         count={total}
