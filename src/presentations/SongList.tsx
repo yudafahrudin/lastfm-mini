@@ -27,10 +27,11 @@ const SongListPresentation: React.FC<Props> = ({
   numberListener,
   numberPlayCount,
 }) => {
+  const pageCount = index + 1 + (page === 0 ? 0 : page * rowPage);
   return (
     <>
       <Grid item xs={0.5}>
-        {index + 1 + (page === 0 ? 0 : page * rowPage)}
+        {pageCount}
       </Grid>
       <Grid item xs={1}>
         <ListItemAvatar>
