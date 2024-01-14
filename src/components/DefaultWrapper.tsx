@@ -29,7 +29,7 @@ const DefaultWrapper: React.FC<Props> = ({ children, leftIcon, rightIcon }) => {
               {leftIcon || (
                 <Stack direction="row" p={1} mr={2}>
                   <Link href="/" underline="none" color="primary">
-                    <strong>SOM</strong>
+                    <strong>SONG OF ME</strong>
                   </Link>
                 </Stack>
               )}
