@@ -42,10 +42,7 @@ const SongPresentation: React.FC = () => {
       >
         <Typography variant="h2">Top Song</Typography>
         <Stack direction="row">
-          <Input
-            placeholder="find your song"
-            onChange={(e) => handleSongSearch(e.target.value)}
-          />
+          <Input placeholder="find your song" onChange={handleSongSearch} />
           <Input
             disabled={!songKey}
             placeholder="by artist"

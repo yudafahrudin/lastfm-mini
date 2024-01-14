@@ -49,10 +49,13 @@ export const useArtistCase = () => {
     setLoading(false);
   };
 
-  const handleArtistSearch = debounce(async (value) => {
-    setPage(0);
-    setArtistKey(value);
-  }, 500);
+  const handleArtistSearch = debounce(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setPage(0);
+      setArtistKey(e.target.value);
+    },
+    500
+  );
 
   const searcArtistList = async () => {
     setLoading(true);

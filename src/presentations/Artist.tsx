@@ -41,9 +41,7 @@ const ArtistPresentation: React.FC = () => {
       >
         <Typography variant="h2">Top Artist</Typography>
         <Input
-          onChange={(e) => {
-            handleArtistSearch(e.target.value);
-          }}
+          onChange={handleArtistSearch}
           placeholder="find your artist"
           endAdornment={
             <IconButton>

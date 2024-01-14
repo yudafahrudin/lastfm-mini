@@ -50,16 +50,22 @@ export const useSongCase = () => {
     setLoading(false);
   };
 
-  const handleSongSearch = debounce(async (value) => {
-    setPage(0);
-    setSongKey(value);
-    if (!value) setArtistKey("");
-  }, 500);
+  const handleSongSearch = debounce(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setPage(0);
+      setSongKey(e.target.value);
+      if (!e.target.value) setArtistKey("");
+    },
+    500
+  );
 
-  const handleSongSearchByArtist = debounce(async (value) => {
-    setPage(0);
-    setArtistKey(value);
-  }, 500);
+  const handleSongSearchByArtist = debounce(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setPage(0);
+      setArtistKey(e.target.value);
+    },
+    500
+  );
 
   const searcSongList = async () => {
     setLoading(true);
