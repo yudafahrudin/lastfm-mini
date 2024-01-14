@@ -17,12 +17,12 @@ Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-Install Yarn packages
+Install packages using yarn
    ```sh
    yarn install
    ```
 
-### How To Run
+### How To Run Locally
 ```sh
 yarn dev
 ```
