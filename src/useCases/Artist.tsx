@@ -26,6 +26,12 @@ export const useArtistCase = () => {
     newPage: number
   ) => {
     setPage(newPage);
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, 500);
   };
 
   const getArtistTopList = async () => {
