@@ -17,7 +17,7 @@ This is mini project for showing top artist and song using last.fm RESTApi inter
 ### Installation
 Clone the repo
    ```sh
-   git clone git@github.com:yudafahrudin/ihc-song-apps.git
+   git clone git@github.com:yudafahrudin/lastfm-mini.git
    ```
 Install packages using yarn
    ```sh
